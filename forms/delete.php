@@ -12,10 +12,12 @@ $result = $stmt->rowCount();
 
 if ($result > 0) {
     // echo "Deleted";
+    $_SESSION['success'] = 'Successfully Deleted';
     header("Location: ../forms/home.php");
     exit;
 } else {
     // echo "Something went wrong";
+    $_SESSION['error'] = 'Something went wrong';
     header("Location: ../forms/home.php");
     exit;
 }

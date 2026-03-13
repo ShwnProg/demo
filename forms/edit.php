@@ -52,8 +52,6 @@ $user = $stmt->fetch();
 
         <button type='submit' name="update">UPDATE</button>
         <a href="../forms/home.php">BACK</a>
-
-
     </form>
 </body>
 
