@@ -1,43 +1,11 @@
 <?php
 session_start();
-require_once "../config/database.php";
 
-if (isset($_SESSION['logged']) && $_SESSION['logged'] == true) {
-    header('Location: home.php');
-    exit;
-}
 
-$db = new Database();
-$conn = $db->conn;
+$error = $_SESSION['error'];
+$old = $_SESSION['old'];
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    // Prepare SQL to fetch user by email
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
-    $stmt->execute(['email' => $email]);
-    $user = $stmt->fetch();
-
-    /* echo "<pre>";
-    print_r($user['username']);
-    echo "</pre>"; */
-
-    if ($user) {
-        if (password_verify($password, $user['password'])) {
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['logged'] = true;
-
-            header('Location: home.php');
-            exit;
-        } else {
-            $error = "Wrong password";
-        }
-    } else {
-        $error = "Email not found";
-    }
-
-}
+session_unset();
 
 ?>
 
@@ -52,13 +20,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <form action="" method="post">
-        <?php echo isset($error) ? "<p style='color: red'> $error </p>" : ''; ?>
+    <form action="/forms/login_process.php" method="post">
         <h2>Login</h2>
-        <input type="text" name="email" id="" placeholder="Enter email">
-        <input type="password" name="password" id="" placeholder="Enter password">
+
+        <?php foreach ($error as $e): ?>
+            <div class="error"><?= htmlspecialchars($e) ?></div>
+        <?php endforeach; ?>
+
+        <input type="text" name="email" id="" placeholder="Enter email"
+            value="<?= htmlspecialchars($old['email']) ?? '' ?>">
+
+        <input type="password" name="password" id="" placeholder="Enter password"
+            value="<?= htmlspecialchars($old['password']) ?? '' ?>">
+
         <button type="submit" name="Login">Login</button>
-        <a class = 'link' href="/forms/registration.php">Register</a>
+        <a class='link' href="/forms/registration.php">Register</a>
     </form>
 </body>
 
