@@ -15,7 +15,7 @@ form {
     background-color: #fff;
     padding: 25px 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px #333;
     min-width: 300px;
 }
 
@@ -122,16 +122,15 @@ button:hover {
 }
 
 .container-header {
-    text-align: center;
-    color: #333;
-    margin-bottom: 50px;
+    text-align: left;
+    color: #d66f0e;
 }
 
 .sub-container {
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
-    padding: 35px 40px;
+    padding: 20px 40px;
     border-radius: 5px;
     max-width: 100%;
     min-width: 50%;
@@ -148,10 +147,10 @@ button:hover {
 }
 
 .sub-container table th {
-    /* background-color: #333; */
+    background-color: #333;
     padding: 8px;
     text-align: center;
-    color: #333;
+    color: #ffffff;
     border-bottom: 2px solid #e5e7eb;
 }
 
@@ -160,6 +159,9 @@ button:hover {
     padding: 8px;
     text-align: center;
     border-bottom: 2px solid #e5e7eb;
+}
+.sub-container table tr:hover{
+    background-color: #e2e2e2;
 }
 
 .action-btn {
@@ -174,8 +176,9 @@ button:hover {
     color: #ffffff;
     text-decoration: none;
     text-align: center;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 7px;
+    border-radius: 3px;
+
 }
 
 .edit-btn:hover {
@@ -187,8 +190,8 @@ button:hover {
     color: #ffffff;
     text-decoration: none;
     text-align: center;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 7px;
+    border-radius: 3px;
 }
 
 .delete-btn:hover {

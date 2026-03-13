@@ -28,13 +28,14 @@ $users = $stmt->fetchAll();
 
 <body>
     <!-- <h1 class='greet'>Welcome <?php echo $_SESSION['username']; ?></h1> -->
-    <a class='logout' href="logout.php">Logout</a>
 
     <div class="container">
-        <!-- <div class="container-header"> -->
-        <!-- <h1>User's Table</h1> -->
-        <!-- </div> -->
+
         <div class="sub-container">
+            <div class="container-header">
+                <h1>Dashboard</h1>
+                <a class='logout' href="logout.php">Logout</a>
+            </div>
             <table>
                 <tr>
                     <th>ID</th>
