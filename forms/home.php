@@ -32,7 +32,7 @@ $users = $stmt->fetchAll();
 
     <div class="container">
         <!-- <div class="container-header"> -->
-            <!-- <h1>User's Table</h1> -->
+        <!-- <h1>User's Table</h1> -->
         <!-- </div> -->
         <div class="sub-container">
             <table>
@@ -52,8 +52,11 @@ $users = $stmt->fetchAll();
                         <td><?= htmlspecialchars($user['email']) ?></td>
                         <td><?= htmlspecialchars($user['website']) == '' ? 'N/A' : $user['website'] ?></td>
                         <td><?= htmlspecialchars($user['gender']) ?></td>
-                        <td><a class='edit-btn' href="edit.php?id=<?= $user['user_id']; ?>">EDIT</a>
-                            <a class='delete-btn' href="delete.php?id=<?= $user['user_id'] ?>">DELETE</a>
+                        <td>
+                            <div class="action-btn">
+                                <a class='edit-btn' href="edit.php?id=<?= $user['user_id']; ?>">EDIT</a>
+                                <a class='delete-btn' href="delete.php?id=<?= $user['user_id'] ?>">DELETE</a>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>

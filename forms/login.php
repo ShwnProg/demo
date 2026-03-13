@@ -54,11 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <form action="" method="post">
         <?php echo isset($error) ? "<p style='color: red'> $error </p>" : ''; ?>
-        <h1>Login</h1>
+        <h2>Login</h2>
         <input type="text" name="email" id="" placeholder="Enter email">
         <input type="password" name="password" id="" placeholder="Enter password">
         <button type="submit" name="Login">Login</button>
-        <a href="/forms/registration.php">Register</a>
+        <a class = 'link' href="/forms/registration.php">Register</a>
     </form>
 </body>
 

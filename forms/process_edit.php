@@ -52,11 +52,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = $stmt->rowCount();
 
-    if($result > 0){
+    if ($result > 0) {
         $_SESSION['successful'] = 'Account Updated';
+        // $_SESSION['user_id'] = $user_id;
+        header("Location: /forms/home.php");
+        exit;
         // echo"hello";
-    }else{
+    } else {
         $error['invalid'] = 'No changes made or user not found';
+        header("Location: /forms/home.php");
+        exit;
         // echo "hi";
     }
 

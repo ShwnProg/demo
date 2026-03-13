@@ -4,7 +4,10 @@ session_start();
 $user_id = $_GET['id'];
 $_SESSION['user_id'] = $user_id;
 
-// var_dump($_SESSION);
+// $user_id = $_SESSION['user_id'];
+
+
+// var_dump($user_id);
 
 $connection = new Database();
 $conn = $connection->conn;
@@ -26,9 +29,9 @@ $user = $stmt->fetch();
 
 <body>
     <form action='process_edit.php' method='POST'>
-        <h1>EDIT</h1>
+        <h2>EDIT</h2>
 
-        <label for="usernmae">Username</label>
+        <label for="username">Username</label>
         <input type="text" name='username' value="<?= htmlspecialchars($user['username']) ?>">
 
         <label for="email">Email</label>
@@ -51,7 +54,7 @@ $user = $stmt->fetch();
         <input type="password" name="password">
 
         <button type='submit' name="update">UPDATE</button>
-        <a href="../forms/home.php">BACK</a>
+        <a class = 'link' href="../forms/home.php">BACK</a>
     </form>
 </body>
 

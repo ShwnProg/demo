@@ -1,17 +1,17 @@
 <?php
 
-class Database {
+// class Database {
 
-    public $conn;
+//     public $conn;
 
-    public function __construct() {
+//     public function __construct() {
 
-        $this->conn = new mysqli("localhost", "root", "pil1298ap", "pmis");
+//         $this->conn = new mysqli("localhost", "root", "pil1298ap", "pmis");
 
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        }
-    }
-}
+//         if ($this->conn->connect_error) {
+//             die("Connection failed: " . $this->conn->connect_error);
+//         }
+//     }
+// }
 
 ?>

@@ -10,16 +10,17 @@ body {
 
 /* --- Form Container --- */
 form {
+    display: flex;
+    flex-direction: column;
     background-color: #fff;
-    padding: 30px 40px;
+    padding: 25px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 400px;
+    min-width: 300px;
 }
 
 h2 {
     text-align: center;
-    margin-bottom: 20px;
     color: #333;
 }
 
@@ -29,12 +30,11 @@ input[type="email"],
 input[type="password"],
 select {
     width: 100%;
-    padding: 10px 12px;
-    margin: 8px 0 16px 0;
+    padding: 8px 25px;
+    margin: 2px 0 16px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    font-size: 14px;
 }
 
 /* --- Labels --- */
@@ -48,9 +48,9 @@ label {
 /* --- Submit Button --- */
 button {
     width: 100%;
-    background-color: #4CAF50;
+    background-color: #da8433;
+    padding: 10px;
     color: white;
-    padding: 12px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -59,7 +59,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #ec9d53;
 }
 
 /* --- Error Message Styling --- */
@@ -75,6 +75,17 @@ button:hover {
     text-align: center;
 }
 
+.link {
+    text-align: center;
+    margin-top: 5px;
+    text-decoration: none;
+    color: #0129df;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
 /* --- Responsive --- */
 @media (max-width: 450px) {
     form {
@@ -83,13 +94,13 @@ button:hover {
     }
 }
 
-.greet{
+/* .greet{
     position: fixed;
     top: 0;
     left: 0;
     color: #45a049;
-}
-.logout{
+} */
+.logout {
     position: fixed;
     top: 0;
     right: 0;
@@ -98,9 +109,11 @@ button:hover {
     color: #000000;
     text-decoration: none;
 }
-.logout:hover{
+
+.logout:hover {
     color: #d41515;
 }
+
 .container {
     display: flex;
     flex-direction: column;
@@ -119,31 +132,44 @@ button:hover {
     flex-direction: column;
     background-color: #ffffff;
     padding: 35px 40px;
-    border-radius: 10px;
+    border-radius: 5px;
     max-width: 100%;
     min-width: 50%;
-    font-size: 24px;
+    font-size: 16px;
     gap: 10px;
+    box-shadow: 0 5px 10px #333;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .sub-container table {
     width: 100%;
     border-collapse: collapse;
 }
-.sub-container table th{
+
+.sub-container table th {
     /* background-color: #333; */
-    padding: 12px;
-    text-align: left;
-    color: #047c0a;
-    border-bottom:2px solid #e5e7eb;
+    padding: 8px;
+    text-align: center;
+    color: #333;
+    border-bottom: 2px solid #e5e7eb;
 }
-.sub-container table td{
+
+.sub-container table td {
     /* background-color: #333; */
-    padding: 12px;
-    text-align: left;
-    border-bottom:2px solid #e5e7eb;
+    padding: 8px;
+    text-align: center;
+    border-bottom: 2px solid #e5e7eb;
 }
-.edit-btn{
+
+.action-btn {
+    display: flex;
+    gap: 5px;
+    margin: 5px;
+
+}
+
+.edit-btn {
     background-color: #159ed4;
     color: #ffffff;
     text-decoration: none;
@@ -151,10 +177,12 @@ button:hover {
     padding: 5px;
     border-radius: 5px;
 }
-.edit-btn:hover{
+
+.edit-btn:hover {
     background-color: #58c1eb;
 }
-.delete-btn{
+
+.delete-btn {
     background-color: #d41515;
     color: #ffffff;
     text-decoration: none;
@@ -162,6 +190,7 @@ button:hover {
     padding: 5px;
     border-radius: 5px;
 }
-.delete-btn:hover{
+
+.delete-btn:hover {
     background-color: #f14f4f;
 }

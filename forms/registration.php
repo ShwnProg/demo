@@ -28,6 +28,7 @@ unset($_SESSION['errors'], $_SESSION['old'], $_SESSION['success']);
 
 <body>
     <form action="validation.php" method="POST">
+        <h2>REGISTER</h2>
         <?php if ($success): ?>
             <div class="success"><?= htmlspecialchars($success) ?></div>
         <?php endif; ?>
@@ -80,7 +81,7 @@ unset($_SESSION['errors'], $_SESSION['old'], $_SESSION['success']);
         <?php endif; ?>
 
         <button type="submit">Submit</button>
-        <a href="/forms/login.php">Login Now</a>
+        <a class = 'link' href="/forms/login.php">Login Now</a>
     </form>
 
 </body>
