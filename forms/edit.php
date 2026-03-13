@@ -6,8 +6,6 @@ $user_id = $_GET['id'];
 $_SESSION['user_id'] = $user_id;
 
 // $user_id = $_SESSION['user_id'];
-
-
 // var_dump($user_id);
 
 $connection = new Database();
@@ -19,8 +17,9 @@ $user = $stmt->fetch();
 
 $error = $_SESSION['error'] ?? [];
 $success = $_SESSION['success'] ?? [];
+$old = $_SESSION['old']??[];
 
-unset($_SESSION['error'], $_SESSION['success']);
+unset($_SESSION['error'], $_SESSION['success'],$_SESSION['old']);
 
 ?>
 <!DOCTYPE html>
@@ -36,56 +35,71 @@ unset($_SESSION['error'], $_SESSION['success']);
 <body>
     <form action='process_edit.php' method='POST'>
         <h2>EDIT</h2>
+
+        <!-- ERROR MESSAGE  -->
         <?php if (!empty($error['invalid'])): ?>
             <div class="error"><?= htmlspecialchars($error['invalid']) ?></div>
         <?php endif; ?>
 
+        <!-- SUCCESS MESSAGE -->
         <?php if (!empty($success)): ?>
             <div class="success"><?= htmlspecialchars($success) ?></div>
         <?php endif; ?>
 
+        <!-- USERNAME -->
         <label for="username">Username</label>
-        <input type="text" name='username' value="<?= htmlspecialchars($user['username']) ?>">
+        <input type="text" name='username' value="<?= htmlspecialchars($old['username']??$user['username']) ?>">
 
+        <!-- USERNAME ERROR MESSAGE -->
         <?php if (!empty($error['username'])): ?>
             <div class="error"><?= htmlspecialchars($error['username']) ?></div>
         <?php endif; ?>
 
+        <!-- EMAIL -->
         <label for="email">Email</label>
-        <input type="text" name='email' value="<?= htmlspecialchars($user['email']) ?>">
+        <input type="text" name='email' value="<?= htmlspecialchars($old['email']??$user['email']) ?>">
 
+        <!-- EMAIL ERROR MESSAGE -->
         <?php if (!empty($error['email'])): ?>
             <div class="error"><?= htmlspecialchars($error['email']) ?></div>
         <?php endif; ?>
 
+        <!-- AGE -->
         <label for="age">Age</label>
-        <input type="text" name='age' value="<?= htmlspecialchars($user['age']) ?>">
+        <input type="text" name='age' value="<?= htmlspecialchars($old['age']??$user['age']) ?>">
 
+        <!-- AGE ERROR MESSAGE -->
         <?php if (!empty($error['age'])): ?>
             <div class="error"><?= htmlspecialchars($error['age']) ?></div>
         <?php endif; ?>
 
-        <label for="website">Website</label>
-        <input type="text" name='website' value="<?= htmlspecialchars($user['website']) ?>">
+        <!-- WEBSITE(OPTIONAL) -->
+        <label for="website">Website(Optional)</label>
+        <input type="text" name='website' value="<?= htmlspecialchars($old['website']??$user['website']) ?>">
 
+        <!-- WEBSITE ERROR MESSAGE -->
         <?php if (!empty($error['website'])): ?>
             <div class="error"><?= htmlspecialchars($error['website']) ?></div>
         <?php endif; ?>
 
+        <!-- GENDER -->
         <label for="gender">Gender</label>
         <select name="gender" id="">
             <option value="">Select a Gender</option>
-            <option value="male" <?= $user['gender'] == 'male' ? 'selected' : '' ?>>Male</option>
-            <option value="female" <?= $user['gender'] == 'female' ? 'selected' : '' ?>>Female</option>
+            <option value="male" <?= $old['gender'] ?? $user['gender'] == 'male' ? 'selected' : '' ?>>Male</option>
+            <option value="female" <?= $old['gender'] ?? $user['gender'] == 'female' ? 'selected' : '' ?>>Female</option>
         </select>
 
+        <!-- GENDER ERROR MESSAGE -->
         <?php if (!empty($error['gender'])): ?>
             <div class="error"><?= htmlspecialchars($error['gender']) ?></div>
         <?php endif; ?>
 
+        <!-- PASSWORD -->
         <label>New Password (leave blank if no change)</label>
-        <input type="password" name="password">
+        <input type="password" name="password" value = "<?= htmlspecialchars($old['password'])?>">
 
+        <!-- PASSWORD ERROR MESSAGE -->
         <?php if (!empty($error['password'])): ?>
             <div class="error"><?= htmlspecialchars($error['password']) ?></div>
         <?php endif; ?>

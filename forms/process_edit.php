@@ -4,6 +4,8 @@ session_start();
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    //  GET THE USER'S INPUT
     $username = trim($_POST['username']) ?? '';
     $email = trim($_POST['email']) ?? '';
     $age = trim($_POST['age']) ?? '';
@@ -13,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $error = [];
 
+    // CHECK EMPTY FIELD
     if (empty($username))
         $error['username'] = 'Username cannot be empty';
     if (empty($email))
@@ -22,9 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($gender))
         $error['gender'] = 'Gender cannot be empty';
 
+    // INSTANTIATE DB OBJECT
     $connection = new Database();
     $user_id = $_SESSION['user_id'];
-    // var_dump($_SESSION);
+    // var_dump($_SESSION); 
     $conn = $connection->conn;
 
     //CHECK IF THERE ARE ANY CHANGES
@@ -35,20 +39,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $isPasswordSame = false;
     $isSameData = false;
 
+    //CHECK IF SAME PASSWORD
     if (!empty($password)) {
         if (password_verify($password, $old_data['password'])) {
             $error['password'] = "Password is the same as the old one";
             $isPasswordSame = true;
         }
     }
-    if (
-        $username == $old_data['username'] &&
+    // COMPARE INPUT TO THE OLD DATA
+    if ($username == $old_data['username'] &&
         $email == $old_data['email'] &&
         $age == $old_data['age'] &&
         $website == $old_data['website'] &&
         $gender == $old_data['gender'] &&
-        (empty($password) || $isPasswordSame)
-    ) {
+        (empty($password) || $isPasswordSame)) 
+    {
         $error['invalid'] = "No changes";
         $isSameData = true;
     }
@@ -85,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (!empty($error)) {
         $_SESSION['error'] = $error;
+        $_SESSION['old'] = $_POST;
         header("Location: /forms/edit.php?id=" . $user_id);
         exit;
     }
