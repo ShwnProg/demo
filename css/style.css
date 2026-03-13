@@ -13,7 +13,7 @@ form {
     background-color: #fff;
     padding: 30px 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     width: 400px;
 }
 
@@ -81,4 +81,87 @@ button:hover {
         width: 90%;
         padding: 20px;
     }
+}
+
+.greet{
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: #45a049;
+}
+.logout{
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 15px;
+    font-size: 24px;
+    color: #000000;
+    text-decoration: none;
+}
+.logout:hover{
+    color: #d41515;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+.container-header {
+    text-align: center;
+    color: #333;
+    margin-bottom: 50px;
+}
+
+.sub-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 35px 40px;
+    border-radius: 10px;
+    max-width: 100%;
+    min-width: 50%;
+    font-size: 24px;
+    gap: 10px;
+}
+
+.sub-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.sub-container table th{
+    /* background-color: #333; */
+    padding: 12px;
+    text-align: left;
+    color: #047c0a;
+    border-bottom:2px solid #e5e7eb;
+}
+.sub-container table td{
+    /* background-color: #333; */
+    padding: 12px;
+    text-align: left;
+    border-bottom:2px solid #e5e7eb;
+}
+.edit-btn{
+    background-color: #159ed4;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+.edit-btn:hover{
+    background-color: #58c1eb;
+}
+.delete-btn{
+    background-color: #d41515;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+.delete-btn:hover{
+    background-color: #f14f4f;
 }
