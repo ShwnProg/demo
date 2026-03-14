@@ -10,17 +10,20 @@ $_SESSION['user_id'] = $user_id;
 
 $connection = new Database();
 $conn = $connection->conn;
-
-$stmt = $conn->prepare("SELECT * FROM users WHERE user_id = :user_id");
-$stmt->execute([':user_id' => $user_id]);
-$user = $stmt->fetch();
+try {
+    $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = :user_id");
+    $stmt->execute([':user_id' => $user_id]);
+    $user = $stmt->fetch();
+} catch (PDOException $e) {
+    echo "Connection Failed : " . $e->getMessage();
+}
 
 $error = $_SESSION['error'] ?? [];
 $success = $_SESSION['success'] ?? [];
-$old = $_SESSION['old']??[];
+$old = $_SESSION['old'] ?? [];
 $gender = $old['gender'] ?? $user['gender'];
 
-unset($_SESSION['error'], $_SESSION['success'],$_SESSION['old']);
+unset($_SESSION['error'], $_SESSION['success'], $_SESSION['old']);
 
 ?>
 <!DOCTYPE html>
@@ -49,7 +52,7 @@ unset($_SESSION['error'], $_SESSION['success'],$_SESSION['old']);
 
         <!-- USERNAME -->
         <label for="username">Username</label>
-        <input type="text" name='username' value="<?= htmlspecialchars($old['username']??$user['username']) ?>">
+        <input type="text" name='username' value="<?= htmlspecialchars($old['username'] ?? $user['username']) ?>">
 
         <!-- USERNAME ERROR MESSAGE -->
         <?php if (!empty($error['username'])): ?>
@@ -58,7 +61,7 @@ unset($_SESSION['error'], $_SESSION['success'],$_SESSION['old']);
 
         <!-- EMAIL -->
         <label for="email">Email</label>
-        <input type="text" name='email' value="<?= htmlspecialchars($old['email']??$user['email']) ?>">
+        <input type="text" name='email' value="<?= htmlspecialchars($old['email'] ?? $user['email']) ?>">
 
         <!-- EMAIL ERROR MESSAGE -->
         <?php if (!empty($error['email'])): ?>
@@ -67,7 +70,7 @@ unset($_SESSION['error'], $_SESSION['success'],$_SESSION['old']);
 
         <!-- AGE -->
         <label for="age">Age</label>
-        <input type="text" name='age' value="<?= htmlspecialchars($old['age']??$user['age']) ?>">
+        <input type="text" name='age' value="<?= htmlspecialchars($old['age'] ?? $user['age']) ?>">
 
         <!-- AGE ERROR MESSAGE -->
         <?php if (!empty($error['age'])): ?>
@@ -76,7 +79,7 @@ unset($_SESSION['error'], $_SESSION['success'],$_SESSION['old']);
 
         <!-- WEBSITE(OPTIONAL) -->
         <label for="website">Website(Optional)</label>
-        <input type="text" name='website' value="<?= htmlspecialchars($old['website']??$user['website']) ?>">
+        <input type="text" name='website' value="<?= htmlspecialchars($old['website'] ?? $user['website']) ?>">
 
         <!-- WEBSITE ERROR MESSAGE -->
         <?php if (!empty($error['website'])): ?>
@@ -98,7 +101,7 @@ unset($_SESSION['error'], $_SESSION['success'],$_SESSION['old']);
 
         <!-- PASSWORD -->
         <label>New Password (leave blank if no change)</label>
-        <input type="password" name="password" value = "<?= htmlspecialchars($old['password'])?>">
+        <input type="password" name="password" value="<?= htmlspecialchars($old['password']) ?>">
 
         <!-- PASSWORD ERROR MESSAGE -->
         <?php if (!empty($error['password'])): ?>

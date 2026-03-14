@@ -71,12 +71,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         //CHECK DUPLICATE EMAIL
         if ($email != $old_data['email']) {
-            $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
-            $stmt->execute([':email' => $email]);
-            $emailExists = $stmt->fetchColumn();
+            try {
+                $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+                $stmt->execute([':email' => $email]);
+                $emailExists = $stmt->fetchColumn();
 
-            if ($emailExists > 0) {
-                $error['email'] = 'Email is already exist';
+                if ($emailExists > 0) {
+                    $error['email'] = 'Email is already exist';
+                }
+            } catch (PDOException $e) {
+                echo "Connection Failed : " . $e->getMessage();
             }
         }
 
@@ -105,39 +109,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($error)) {
         $_SESSION['error'] = $error;
         $_SESSION['old'] = $_POST;
-        header("Location: /forms/edit.php?id=" . $user_id);
+        header("Location: edit.php?id=" . $user_id);
         exit;
     }
 
-    if (!empty($password) && !$isPasswordSame) {
+    try {
+        if (!empty($password) && !$isPasswordSame) {
 
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $conn->prepare("UPDATE users SET username = :username,email=:email,age=:age,gender=:gender,website=:website,password = :password WHERE user_id = :user_id");
-        $stmt->execute([
-            ':username' => $username,
-            ':email' => $email,
-            ':age' => $age,
-            ':gender' => $gender,
-            ':website' => $website,
-            ':password' => $hashed_password,
-            ':user_id' => $user_id
-        ]);
-    } else {
-        $stmt = $conn->prepare("UPDATE users SET username = :username,email=:email,age=:age,gender=:gender,website=:website WHERE user_id = :user_id");
-        $stmt->execute([
-            ':username' => $username,
-            ':email' => $email,
-            ':age' => $age,
-            ':gender' => $gender,
-            ':website' => $website,
-            ':user_id' => $user_id
-        ]);
+            $stmt = $conn->prepare("UPDATE users SET username = :username,email=:email,age=:age,gender=:gender,website=:website,password = :password WHERE user_id = :user_id");
+            $stmt->execute([
+                ':username' => $username,
+                ':email' => $email,
+                ':age' => $age,
+                ':gender' => $gender,
+                ':website' => $website,
+                ':password' => $hashed_password,
+                ':user_id' => $user_id
+            ]);
+        } else {
+            $stmt = $conn->prepare("UPDATE users SET username = :username,email=:email,age=:age,gender=:gender,website=:website WHERE user_id = :user_id");
+            $stmt->execute([
+                ':username' => $username,
+                ':email' => $email,
+                ':age' => $age,
+                ':gender' => $gender,
+                ':website' => $website,
+                ':user_id' => $user_id
+            ]);
+        }
+        $_SESSION['success'] = 'Account Updated';
+
+    } catch (PDOException $e) {
+        // echo "Connection Failed : " . $e->getMessage();
+        $_SESSION['error'] = ['invalid'=>'Something Went Wrong'];
     }
 
 
-    $_SESSION['success'] = 'Account Updated';
-    header("Location: /forms/edit.php?id=" . $user_id);
+    header("Location: edit.php?id=" . $user_id);
     exit;
 
 }

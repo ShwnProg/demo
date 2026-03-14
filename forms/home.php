@@ -10,10 +10,13 @@ require_once "../config/database.php";
 $connection = new Database();
 
 $conn = $connection->conn;
-
-$stmt = $conn->prepare("SELECT * FROM users");
-$stmt->execute();
-$users = $stmt->fetchAll();
+try {
+    $stmt = $conn->prepare("SELECT * FROM users");
+    $stmt->execute();
+    $users = $stmt->fetchAll();
+} catch (PDOException $e) {
+    echo "Connection Failed : " . $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>

@@ -101,7 +101,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         
 
     } catch (PDOException $e) {
-        $_SESSION['errors'] = ['db_error' => $e->getMessage()];
+        $_SESSION['errors'] = ['db_error' => "Something Went Wrong"];
         header("Location: registration.php");
         exit;
     }

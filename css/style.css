@@ -173,7 +173,7 @@ button:hover {
 }
 
 .edit-btn {
-    background-color: #4CAF50;
+    background-color: #3651ca;
     color: #ffffff;
     text-decoration: none;
     text-align: center;
@@ -183,7 +183,7 @@ button:hover {
 }
 
 .edit-btn:hover {
-    background-color: #5db960;
+    background-color: #5a71d6;
 }
 
 .delete-btn {

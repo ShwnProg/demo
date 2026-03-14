@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['username'] = $user['username'];
     $_SESSION['logged'] = true;
 
-    header('Location: /forms/home.php');
+    header('Location: home.php');
     exit;
 
 
