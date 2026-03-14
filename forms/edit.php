@@ -18,6 +18,7 @@ $user = $stmt->fetch();
 $error = $_SESSION['error'] ?? [];
 $success = $_SESSION['success'] ?? [];
 $old = $_SESSION['old']??[];
+$gender = $old['gender'] ?? $user['gender'];
 
 unset($_SESSION['error'], $_SESSION['success'],$_SESSION['old']);
 
@@ -86,8 +87,8 @@ unset($_SESSION['error'], $_SESSION['success'],$_SESSION['old']);
         <label for="gender">Gender</label>
         <select name="gender" id="">
             <option value="">Select a Gender</option>
-            <option value="male" <?= $old['gender'] ?? $user['gender'] == 'male' ? 'selected' : '' ?>>Male</option>
-            <option value="female" <?= $old['gender'] ?? $user['gender'] == 'female' ? 'selected' : '' ?>>Female</option>
+            <option value="male" <?= $gender == 'male' ? 'selected' : '' ?>>Male</option>
+            <option value="female" <?= $gender == 'female' ? 'selected' : '' ?>>Female</option>
         </select>
 
         <!-- GENDER ERROR MESSAGE -->

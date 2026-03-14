@@ -47,24 +47,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
     // COMPARE INPUT TO THE OLD DATA
-    if ($username == $old_data['username'] &&
+    if (
+        $username == $old_data['username'] &&
         $email == $old_data['email'] &&
         $age == $old_data['age'] &&
         $website == $old_data['website'] &&
         $gender == $old_data['gender'] &&
-        (empty($password) || $isPasswordSame)) 
-    {
+        (empty($password) || $isPasswordSame)
+    ) {
         $error['invalid'] = "No changes";
         $isSameData = true;
     }
 
     if (!$isSameData) {
+
         // Email validation
         $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
         $cleanEmail = filter_var($sanitized_email, FILTER_VALIDATE_EMAIL);
 
         if ($cleanEmail === false) {
             $error['email'] = "Invalid email address.";
+        }
+
+        //CHECK DUPLICATE EMAIL
+        if ($email != $old_data['email']) {
+            $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+            $stmt->execute([':email' => $email]);
+            $emailExists = $stmt->fetchColumn();
+
+            if ($emailExists > 0) {
+                $error['email'] = 'Email is already exist';
+            }
         }
 
         //Age Validation
@@ -86,6 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!in_array($gender, $allowedGenders)) {
             $error['gender'] = "Invalid gender selection.";
         }
+
     }
 
     if (!empty($error)) {

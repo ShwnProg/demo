@@ -79,11 +79,11 @@ button:hover {
     text-align: center;
     margin-top: 5px;
     text-decoration: none;
-    color: #0129df;
+    color: #3651ca;
 }
 
 .link:hover {
-    text-decoration: underline;
+    color: #5a71d6;
 }
 
 /* --- Responsive --- */
@@ -160,7 +160,8 @@ button:hover {
     text-align: center;
     border-bottom: 2px solid #e5e7eb;
 }
-.sub-container table tr:hover{
+
+.sub-container table tr:hover {
     background-color: #e2e2e2;
 }
 
@@ -172,7 +173,7 @@ button:hover {
 }
 
 .edit-btn {
-    background-color: #d66f0e;
+    background-color: #4CAF50;
     color: #ffffff;
     text-decoration: none;
     text-align: center;
@@ -182,7 +183,7 @@ button:hover {
 }
 
 .edit-btn:hover {
-    background-color: #da8433;
+    background-color: #5db960;
 }
 
 .delete-btn {

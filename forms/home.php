@@ -40,6 +40,7 @@ $users = $stmt->fetchAll();
                 <tr>
                     <th>ID</th>
                     <th>Username</th>
+                    <th>Age</th>
                     <th>Email</th>
                     <th>Website</th>
                     <th>Gender</th>
@@ -50,6 +51,7 @@ $users = $stmt->fetchAll();
                     <tr>
                         <td><?= htmlspecialchars($user['user_id']) ?></td>
                         <td><?= htmlspecialchars($user['username']) ?></td>
+                        <td><?= htmlspecialchars($user['age']) ?></td>
                         <td><?= htmlspecialchars($user['email']) ?></td>
                         <td><?= htmlspecialchars($user['website']) == '' ? 'N/A' : $user['website'] ?></td>
                         <td><?= htmlspecialchars($user['gender']) ?></td>
