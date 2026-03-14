@@ -27,9 +27,9 @@ $users = $stmt->fetchAll();
 </head>
 
 <body>
-    <!-- <h1 class='greet'>Welcome <?php echo $_SESSION['username']; ?></h1> -->
 
     <div class="container">
+        <h1 class='greet'>Welcome <?php echo $_SESSION['username']; ?></h1>
 
         <div class="sub-container">
             <div class="container-header">
