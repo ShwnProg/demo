@@ -168,7 +168,7 @@ button:hover {
 .action-btn {
     display: flex;
     gap: 5px;
-    margin: 5px;
+    margin: 10px;
 
 }
 
