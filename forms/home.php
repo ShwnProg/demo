@@ -17,6 +17,10 @@ try {
 } catch (PDOException $e) {
     echo "Connection Failed : " . $e->getMessage();
 }
+
+unset($_SESSION['success'],$_SESSION['error']);
+
+// var_dump($_SESSION['success']);
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +43,15 @@ try {
                 <h1>Dashboard</h1>
                 <a class='logout' href="logout.php">Logout</a>
             </div>
+            <?php if (!empty($_SESSION['success'])): ?>
+                <div class="success"><?= $_SESSION['success'] ?></div>
+            <?php endif; ?>
+
+            <?php if (!empty($_SESSION['error'])): ?>
+                <div class="error"><?= $_SESSION['error'] ?></div>
+            <?php endif; ?>
+
+
             <table>
                 <tr>
                     <th>ID</th>

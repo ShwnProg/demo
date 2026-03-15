@@ -13,10 +13,10 @@ form {
     display: flex;
     flex-direction: column;
     background-color: #fff;
-    padding: 25px 30px;
+    padding: 20px 25px;
     border-radius: 10px;
     box-shadow: 0 5px 10px #333;
-    min-width: 300px;
+    min-width: 280px;
 }
 
 h2 {
@@ -30,8 +30,8 @@ input[type="email"],
 input[type="password"],
 select {
     width: 100%;
-    padding: 8px 25px;
-    margin: 2px 0 16px 0;
+    padding: 6px;
+    margin: 2px 0 12px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
@@ -39,38 +39,39 @@ select {
 
 /* --- Labels --- */
 label {
-    font-weight: bold;
+    font-weight: 600;
     display: block;
     margin-bottom: 5px;
-    color: #555;
+    color: #1b1b1b;
 }
 
 /* --- Submit Button --- */
 button {
     width: 100%;
-    background-color: #da8433;
-    padding: 10px;
+    background-color: #2e4558;
+    padding: 8px;
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #ec9d53;
+    background-color: #405769;
 }
 
 /* --- Error Message Styling --- */
 .error {
+    font-size: 12px;
     color: #ff0000;
     margin-bottom: 15px;
 }
 
 /* --- Success Message Styling --- */
 .success {
-    color: #4CAF50;
+    color: #037c07;
     margin-bottom: 15px;
     text-align: center;
 }
@@ -79,11 +80,11 @@ button:hover {
     text-align: center;
     margin-top: 5px;
     text-decoration: none;
-    color: #3651ca;
+    color: #0735ff;
 }
 
 .link:hover {
-    color: #5a71d6;
+    color: #7489e7;
 }
 
 /* --- Responsive --- */

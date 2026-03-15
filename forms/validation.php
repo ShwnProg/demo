@@ -2,7 +2,7 @@
 session_start();
 require_once "../config/database.php";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Collect and sanitize
     $username = trim($_POST['username'] ?? '');
     $email = trim($_POST['email'] ?? '');
@@ -34,19 +34,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Email validation
-    $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    $cleanEmail = filter_var($sanitized_email, FILTER_VALIDATE_EMAIL);
-    if ($cleanEmail === false) {
-        $errors['email'] = "Invalid email address.";
+    if (!empty($email)) {
+        $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        $cleanEmail = filter_var($sanitized_email, FILTER_VALIDATE_EMAIL);
+        if ($cleanEmail == false) {
+            $errors['email'] = "Invalid email address.";
+        }
     }
 
     // Age validation
+
     if (!empty($age)) {
         $cleanAge = filter_var($age, FILTER_VALIDATE_INT);
         if ($cleanAge === false) {
             $errors['age'] = "Age must be a number.";
         }
     }
+
 
     // Website validation (optional)
     if (!empty($website)) {

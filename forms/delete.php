@@ -1,5 +1,6 @@
 <?php
 require_once '../config/database.php';
+session_start();
 $user_id = $_GET['id'];
 
 $connection = new Database();
@@ -12,7 +13,8 @@ $result = $stmt->rowCount();
 
 if ($result > 0) {
     // echo "Deleted";
-    $_SESSION['success'] = 'Successfully Deleted';
+    $_SESSION['success'] = 'Deleted Successfully';
+    // var_dump($_SESSION);
     header("Location: home.php");
     exit;
 } else {

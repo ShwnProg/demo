@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
         $cleanEmail = filter_var($sanitized_email, FILTER_VALIDATE_EMAIL);
 
-        if ($cleanEmail === false) {
+        if ($cleanEmail == false) {
             $error['email'] = "Invalid email address.";
         }
 
