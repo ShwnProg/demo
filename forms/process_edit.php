@@ -85,9 +85,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         //Age Validation
-        $cleanAge = filter_var($age, FILTER_VALIDATE_INT);
-        if ($cleanAge === false) {
-            $error['age'] = "Age must be a number.";
+        if (!empty($age)) {
+            $cleanAge = filter_var($age, FILTER_VALIDATE_INT);
+            if ($cleanAge === false) {
+                $error['age'] = "Age must be a number.";
+            }
         }
 
         // Website validation (optional)
@@ -143,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     } catch (PDOException $e) {
         // echo "Connection Failed : " . $e->getMessage();
-        $_SESSION['error'] = ['invalid'=>'Something Went Wrong'];
+        $_SESSION['error'] = ['invalid' => 'Something Went Wrong'];
     }
 
 

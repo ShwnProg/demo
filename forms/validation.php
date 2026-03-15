@@ -2,7 +2,7 @@
 session_start();
 require_once "../config/database.php";
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Collect and sanitize
     $username = trim($_POST['username'] ?? '');
     $email = trim($_POST['email'] ?? '');
@@ -15,47 +15,55 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $errors = [];
 
     // Required fields
-    if(empty($username)) $errors['username'] = 'Username is required.';
-    if(empty($email)) $errors['email'] = 'Email is required.';
-    if(empty($age)) $errors['age'] = 'Age is required.';
-    if(empty($password)) $errors['password'] = 'Password is required.';
-    if(empty($confirm_password)) $errors['confirm_password'] = 'Confirm Password is required.';
-    if(empty($gender)) $errors['gender'] = 'Gender is required.';
+    if (empty($username))
+        $errors['username'] = 'Username is required.';
+    if (empty($email))
+        $errors['email'] = 'Email is required.';
+    if (empty($age))
+        $errors['age'] = 'Age is required.';
+    if (empty($password))
+        $errors['password'] = 'Password is required.';
+    if (empty($confirm_password))
+        $errors['confirm_password'] = 'Confirm Password is required.';
+    if (empty($gender))
+        $errors['gender'] = 'Gender is required.';
 
     // Password match
-    if($password !== $confirm_password){
+    if ($password !== $confirm_password) {
         $errors['confirm_password'] = 'Passwords do not match.';
     }
 
     // Email validation
     $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
     $cleanEmail = filter_var($sanitized_email, FILTER_VALIDATE_EMAIL);
-    if($cleanEmail === false){
+    if ($cleanEmail === false) {
         $errors['email'] = "Invalid email address.";
-    }   
+    }
 
     // Age validation
-    $cleanAge = filter_var($age, FILTER_VALIDATE_INT);
-    if($cleanAge === false){
-        $errors['age'] = "Age must be a number.";
+    if (!empty($age)) {
+        $cleanAge = filter_var($age, FILTER_VALIDATE_INT);
+        if ($cleanAge === false) {
+            $errors['age'] = "Age must be a number.";
+        }
     }
 
     // Website validation (optional)
-    if(!empty($website)){
+    if (!empty($website)) {
         $cleanWebsite = filter_var($website, FILTER_VALIDATE_URL);
-        if(!$cleanWebsite){
+        if (!$cleanWebsite) {
             $errors['website'] = "Invalid website URL.";
         }
     }
 
     // Gender validation
-    $allowedGenders = ['male','female'];
-    if(!in_array($gender, $allowedGenders)){
+    $allowedGenders = ['male', 'female'];
+    if (!in_array($gender, $allowedGenders)) {
         $errors['gender'] = "Invalid gender selection.";
     }
 
     // Redirect back with errors if any
-    if(!empty($errors)){
+    if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
         $_SESSION['old'] = $_POST;
         header("Location: registration.php");
@@ -73,12 +81,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
         $stmt->execute(['email' => $cleanEmail]);
         $emailExists = $stmt->fetchColumn();
-        
-        if($emailExists > 0){
+
+        if ($emailExists > 0) {
             $_SESSION['errors'] = ['db_error' => 'Email Already Exists.'];
             header("Location: registration.php");
             exit;
-        }else{
+        } else {
             //INSERT
             $stmt = $conn->prepare(
                 "INSERT INTO users (username, email, age, password, website, gender)
@@ -87,18 +95,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             $stmt->execute([
                 'username' => $username,
-                'email'    => $cleanEmail,
-                'age'      => $cleanAge,
+                'email' => $cleanEmail,
+                'age' => $cleanAge,
                 'password' => $hashedPassword,
-                'website'  => $cleanWebsite,
-                'gender'   => $gender
+                'website' => $cleanWebsite,
+                'gender' => $gender
             ]);
 
             $_SESSION['success'] = "Registration Successful";
             header("Location: registration.php");
             exit;
         }
-        
+
 
     } catch (PDOException $e) {
         $_SESSION['errors'] = ['db_error' => "Something Went Wrong"];
@@ -106,7 +114,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         exit;
     }
 
-}else{
+} else {
     header("Location: registration.php");
     exit;
 }
