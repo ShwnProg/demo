@@ -1,4 +1,6 @@
 <?php
+require_once "../config/database.php";
+
 session_start();
 
 if (!isset($_SESSION['logged']) || $_SESSION['logged'] != true) {
@@ -6,7 +8,6 @@ if (!isset($_SESSION['logged']) || $_SESSION['logged'] != true) {
     exit;
 }
 
-require_once "../config/database.php";
 $connection = new Database();
 
 $conn = $connection->conn;
@@ -18,7 +19,7 @@ try {
     echo "Connection Failed : " . $e->getMessage();
 }
 
-unset($_SESSION['success'],$_SESSION['error']);
+// unset($_SESSION['success'],$_SESSION['error']);
 
 // var_dump($_SESSION['success']);
 ?>

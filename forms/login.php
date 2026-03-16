@@ -2,10 +2,12 @@
 session_start();
 
 
-$error = $_SESSION['error'];
-$old = $_SESSION['old'];
+$error = $_SESSION['error'] ?? [];
+$old = $_SESSION['old'] ?? [];
 
-session_unset();
+// session_unset();
+
+// var_dump($old);
 
 ?>
 
@@ -20,7 +22,7 @@ session_unset();
 </head>
 
 <body>
-    <form action="/forms/login_process.php" method="post">
+    <form action="login_process.php" method="post">
         <h2>Login</h2>
 
         <?php foreach ($error as $e): ?>
@@ -28,10 +30,10 @@ session_unset();
         <?php endforeach; ?>
 
         <input type="text" name="email" id="" placeholder="Enter email"
-            value="<?= htmlspecialchars($old['email']) ?? '' ?>">
+            value="<?= htmlspecialchars($old['email'] ?? '')?>">
 
         <input type="password" name="password" id="" placeholder="Enter password"
-            value="<?= htmlspecialchars($old['password']) ?? '' ?>">
+            value="<?= htmlspecialchars($old['password']?? '')?>">
 
         <button type="submit" name="Login">Login</button>
         <a class='link' href="/forms/registration.php">Register</a>
